@@ -1,10 +1,7 @@
-import "@notionhq/custom-blocks/nds.css"
-import {
-  NotionCustomBlock,
-  NotionTokenScope,
-} from "@notionhq/custom-blocks/react"
-import ReactDOM from "react-dom/client"
-import "./index.css"
+import '@notionhq/custom-blocks/nds.css';
+import { NotionCustomBlock, NotionTokenScope } from '@notionhq/custom-blocks/react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
 
 function App() {
   return (
@@ -20,7 +17,7 @@ function App() {
             👋
           </span>
           <div>
-            <h1 id="starter-title">Hello world</h1>
+            <h1 id="starter-title">Hello world!</h1>
             <p>Your custom block is ready to edit.</p>
           </div>
         </div>
@@ -28,17 +25,16 @@ function App() {
         <div className="next-step">
           <span>Next step</span>
           <p>
-            Edit <code>index.tsx</code>, then deploy with{" "}
-            <code>ntn workers deploy</code>.
+            Edit <code>index.tsx</code>, then deploy with <code>ntn workers deploy</code>.
           </p>
         </div>
       </section>
     </main>
-  )
+  );
 }
 
-const root = document.getElementById("root")
-if (!root) throw new Error("Missing #root element")
+const root = document.getElementById('root');
+if (!root) throw new Error('Missing #root element');
 
 ReactDOM.createRoot(root).render(
   <NotionCustomBlock autoResize>
@@ -46,4 +42,4 @@ ReactDOM.createRoot(root).render(
       <App />
     </NotionTokenScope>
   </NotionCustomBlock>
-)
+);
