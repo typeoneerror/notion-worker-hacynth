@@ -20,10 +20,12 @@ export type SoundcloudTrack = {
   urn: string;
 };
 
-export type SoundcloudResults = {
-  collection: SoundcloudTrack[];
+export type SoundcloudPage<T> = {
+  collection: T[];
   next_href?: string | undefined;
 };
+
+export type SoundcloudResults = SoundcloudPage<SoundcloudTrack>;
 
 export function formatDate({
   release_year: y,
@@ -36,4 +38,28 @@ export function formatDate({
 
 export function formatArtworkUrl(url: string | null, size = 't500x500'): string | null {
   return url ? url.replace('-large.', `-${size}.`) : null;
+}
+
+export async function soundcloudFetchPage<T>(url: string, token: string): Promise<T> {
+  const response = await fetch(url, {
+    headers: { Authorization: `OAuth ${token}` },
+  });
+
+  if (!response.ok) {
+    // FIXME: add better error handling
+    throw new Error(`SoundCloud [${response.status}]: ${await response.text()}`);
+  }
+
+  return (await response.json()) as T;
+}
+
+export async function soundcloudFetchAll<T>(url: string, token: string): Promise<T[]> {
+  const items: T[] = [];
+  let next: string | null = url;
+  while (next) {
+    const response: SoundcloudPage<T> = await soundcloudFetchPage(next, token);
+    items.push(...(response.collection ?? []));
+    next = response.next_href ?? null;
+  }
+  return items;
 }

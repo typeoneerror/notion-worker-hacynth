@@ -6,6 +6,8 @@ import {
   SOUNDCLOUD_API_BASE,
   formatArtworkUrl,
   formatDate,
+  soundcloudFetchPage,
+  soundcloudFetchAll,
   SoundcloudResults,
   SoundcloudTrack,
 } from './soundcloud.js';
@@ -13,6 +15,9 @@ import {
 const worker = new Worker();
 export default worker;
 
+/**
+ * Authenticate with the Soundcloud (OAuth 2.1).
+ */
 const soundcloudAuth = worker.oauth('soundcloudAuth', {
   name: 'soundcloud-oauth',
   authorizationEndpoint: 'https://secure.soundcloud.com/authorize',
@@ -22,6 +27,9 @@ const soundcloudAuth = worker.oauth('soundcloudAuth', {
   clientSecret: process.env.SOUNDCLOUD_CLIENT_SECRET ?? '',
 });
 
+/**
+ * Defines the data source where tracks will be synced.
+ */
 const tracks = worker.database('tracks', {
   type: 'managed',
   initialTitle: 'SC Tracks',
@@ -44,22 +52,9 @@ const tracks = worker.database('tracks', {
   },
 });
 
-async function fetchTracks(
-  url: string = `${SOUNDCLOUD_API_BASE}/me/tracks?limit=100&linked_partitioning=true`
-): Promise<SoundcloudResults> {
-  const token = await soundcloudAuth.accessToken();
-  const response = await fetch(url, {
-    headers: { Authorization: `OAuth ${token}` },
-  });
-
-  if (!response.ok) {
-    // FIXME: add better error handling
-    throw new Error(`SoundCloud [${response.status}]: ${await response.text()}`);
-  }
-
-  return (await response.json()) as SoundcloudResults;
-}
-
+/**
+ *  Returns upsert data to update a specific row in Notion with the track details.
+ */
 function updateTrack(t: SoundcloudTrack) {
   const cover = formatArtworkUrl(t.artwork_url);
   return {
@@ -82,21 +77,30 @@ function updateTrack(t: SoundcloudTrack) {
   };
 }
 
+/**
+ * Rate-limit the Soundcloud requests.
+ */
 const soundcloudPacer = worker.pacer('soundcloudPacer', {
   allowedRequests: 5,
   intervalMs: 1000,
 });
 
-type BackfillState = { nextHref?: string };
+type BackfillState = { nextHref?: string | undefined };
 
+/**
+ * Sync the authenticated user's tracks daily (or on demand).
+ */
 worker.sync('tracksBackfill', {
   database: tracks,
   mode: 'replace',
   schedule: '1d',
   execute: async (state?: BackfillState) => {
     await soundcloudPacer.wait();
-
-    const results = await fetchTracks(state?.nextHref);
+    const token = await soundcloudAuth.accessToken();
+    const results = await soundcloudFetchPage<SoundcloudResults>(
+      state?.nextHref || `${SOUNDCLOUD_API_BASE}/me/tracks?limit=100&linked_partitioning=true`,
+      token
+    );
     const nextHref = results.next_href ?? undefined;
 
     return {
