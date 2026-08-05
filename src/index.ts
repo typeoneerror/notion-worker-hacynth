@@ -1,13 +1,16 @@
-import { Worker } from '@notionhq/workers';
+import { WebhookEvent, Worker } from '@notionhq/workers';
 import * as Builder from '@notionhq/workers/builder';
 import * as Schema from '@notionhq/workers/schema';
+import { getProp, getPlainText } from './properties.js';
 import {
   ACCESS_LEVELS,
   SOUNDCLOUD_API_BASE,
+  SOUNDCLOUD_LIST_ARGS,
   formatArtworkUrl,
   formatDate,
-  soundcloudFetchPage,
+  soundcloudFetch,
   soundcloudFetchAll,
+  soundcloudFetchPage,
   SoundcloudResults,
   SoundcloudTrack,
 } from './soundcloud.js';
@@ -98,7 +101,7 @@ worker.sync('tracksBackfill', {
     await soundcloudPacer.wait();
     const token = await soundcloudAuth.accessToken();
     const results = await soundcloudFetchPage<SoundcloudResults>(
-      state?.nextHref || `${SOUNDCLOUD_API_BASE}/me/tracks?limit=100&linked_partitioning=true`,
+      state?.nextHref || `${SOUNDCLOUD_API_BASE}/me/tracks?${SOUNDCLOUD_LIST_ARGS}`,
       token
     );
     const nextHref = results.next_href ?? undefined;
@@ -108,6 +111,97 @@ worker.sync('tracksBackfill', {
       hasMore: Boolean(nextHref),
       nextState: nextHref ? { nextHref } : undefined,
     };
+  },
+});
+
+const PLAYLIST_URN = 'soundcloud:playlists:2279036027';
+
+type PlaylistAction = {
+  includeTrack: Boolean;
+  pageId: string;
+  urn: string;
+};
+
+function verifyOnPlaylistNextCheckedWebhook(event: WebhookEvent): PlaylistAction | null {
+  // FIXME: actually verify w/crypto
+
+  if (typeof event !== 'object' || event === null) return null;
+
+  const {
+    body: { data },
+  } = event;
+
+  const { id: pageId, properties } = data as {
+    id: string;
+    properties: Record<string, object>;
+  };
+
+  if (typeof pageId !== 'string' || pageId.length === 0) return null;
+  if (typeof properties !== 'object' || properties === null) return null;
+
+  const props = properties as Record<string, unknown>;
+
+  const urnProp = getProp(props, 'URN', 'rich_text');
+  const nextProp = getProp(props, 'Next?', 'checkbox');
+  if (!urnProp || !nextProp) return null;
+
+  const urn = getPlainText(urnProp.rich_text);
+  if (!urn.startsWith('soundcloud:tracks:')) return null;
+  const includeTrack = nextProp.checkbox;
+
+  return { includeTrack, pageId, urn };
+}
+
+async function updatePlaylist({ includeTrack, urn }: PlaylistAction) {
+  const token = await soundcloudAuth.accessToken();
+
+  // Fetch existing tracks
+  const playlistUrl = `${SOUNDCLOUD_API_BASE}/playlists/${encodeURIComponent(PLAYLIST_URN)}`;
+  const url = `${playlistUrl}/tracks?${SOUNDCLOUD_LIST_ARGS}`;
+  const currentTracks = await soundcloudFetchAll<SoundcloudTrack>(url, token);
+
+  // Build new tracks
+  const urns = currentTracks.map((t) => t.urn);
+  const updatedUrns = includeTrack ? [...urns, urn] : urns.filter((u) => u !== urn);
+  const tracks = updatedUrns.map((urn) => ({ urn }));
+  const body = JSON.stringify({
+    playlist: {
+      tracks,
+    },
+  });
+
+  // FIXME: should probably handle this error
+  await soundcloudFetch(playlistUrl, token, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      playlist: {
+        tracks,
+      },
+    }),
+  });
+}
+
+/**
+ * Webhook to add a specific track to the "Next" playlist.
+ *
+ * TODO: could just load state from Notion database instead.
+ */
+worker.webhook('onPlaylistNextChecked', {
+  title: 'Add to "Next" playlist',
+  description: 'Adds the requested track to the "Next" playlist',
+  execute: async (events) => {
+    for (const event of events) {
+      const request = verifyOnPlaylistNextCheckedWebhook(event);
+
+      if (!request) {
+        throw new Error(`Unable to verify webhook delivery ${event.deliveryId}`);
+      }
+
+      await updatePlaylist(request);
+    }
   },
 });
 

@@ -1,4 +1,8 @@
 export const SOUNDCLOUD_API_BASE = 'https://api.soundcloud.com';
+export const SOUNDCLOUD_LIST_ARGS = new URLSearchParams({
+  limit: '100',
+  linked_partitioning: 'true',
+});
 
 export const ACCESS_LEVELS = ['playable', 'preview', 'blocked'] as const;
 export type AccessType = (typeof ACCESS_LEVELS)[number];
@@ -40,16 +44,28 @@ export function formatArtworkUrl(url: string | null, size = 't500x500'): string 
   return url ? url.replace('-large.', `-${size}.`) : null;
 }
 
-export async function soundcloudFetchPage<T>(url: string, token: string): Promise<T> {
+export async function soundcloudFetch(
+  url: string,
+  token: string,
+  init?: RequestInit
+): Promise<Response> {
   const response = await fetch(url, {
-    headers: { Authorization: `OAuth ${token}` },
+    ...init,
+    headers: { Authorization: `OAuth ${token}`, ...(init?.headers ?? {}) },
   });
-
   if (!response.ok) {
     // FIXME: add better error handling
     throw new Error(`SoundCloud [${response.status}]: ${await response.text()}`);
   }
+  return response;
+}
 
+export async function soundcloudFetchPage<T>(
+  url: string,
+  token: string,
+  init?: RequestInit
+): Promise<T> {
+  const response = await soundcloudFetch(url, token, init);
   return (await response.json()) as T;
 }
 
