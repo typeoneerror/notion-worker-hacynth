@@ -1,0 +1,48 @@
+{
+  "type": "worker",
+  "key": "worker_tracks",
+  "name": "SC Tracks",
+  "schema": {
+    "ID": {
+      "name": "ID",
+      "type": "rich_text"
+    },
+    "Title": {
+      "name": "Title",
+      "type": "title"
+    },
+    "Release Date": {
+      "name": "Release Date",
+      "type": "date"
+    },
+    "URL": {
+      "name": "URL",
+      "type": "url"
+    },
+    "Plays": {
+      "name": "Plays",
+      "type": "number"
+    },
+    "Favorites": {
+      "name": "Favorites",
+      "type": "number"
+    },
+    "Duration": {
+      "name": "Duration",
+      "type": "number"
+    },
+    "Access Type": {
+      "name": "Access Type",
+      "type": "select"
+    },
+    "URI": {
+      "name": "URI",
+      "type": "url"
+    },
+    "URN": {
+      "name": "URN",
+      "type": "rich_text"
+    }
+  },
+  "rows": []
+}
