@@ -87,11 +87,13 @@ h1 {
   background: var(--bg-muted);
 }
 
-.step > span {
+.step > .label {
   display: block;
-  margin-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--border-primary);
+  margin-bottom: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
   color: var(--content-tertiary);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -101,7 +103,7 @@ h1 {
 .step ul {
   margin: 0;
   color: var(--content-secondary);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -112,6 +114,12 @@ h1 {
 .info {
   font-style: italic;
   color: var(--content-primary);
+}
+
+.selected {
+  color: var(--green-80);
+  font-weight: var(--font-weight-medium);
+  border-radius: 4px;
 }
 
 code {

@@ -39,13 +39,13 @@ export function App() {
 
         {isLoading ? (
           <div className="step">
-            <span>Tracks</span>
+            <span className="label">Tracks</span>
             <p>Loading track data...</p>
           </div>
         ) : (
           <>
             <div className="step">
-              <span>Location</span>
+              <span className="label">Location</span>
               <p>
                 You're viewing <em className="info">{blockId}</em> inside{' '}
                 <em className="info">{page.id}</em>.
@@ -53,7 +53,7 @@ export function App() {
             </div>
 
             <div className="step">
-              <span>Parent</span>
+              <span className="label">Parent</span>
               <p>
                 This block is parented by <em className="info">{parent.id}</em> which is a{' '}
                 <em className="info">{parent.type}</em>.
@@ -61,8 +61,8 @@ export function App() {
             </div>
 
             <div className="step">
-              <span>Tracks</span>
-              <Tracks tracks={tracks} error={error} />
+              <span className="label">Tracks</span>
+              <Tracks tracks={tracks} page={page} error={error} />
             </div>
           </>
         )}
