@@ -19,12 +19,20 @@
       "name": "URL",
       "type": "url"
     },
+    "Artwork URL": {
+      "name": "Artwork URL",
+      "type": "url"
+    },
     "Plays": {
       "name": "Plays",
       "type": "number"
     },
     "Favorites": {
       "name": "Favorites",
+      "type": "number"
+    },
+    "Comments": {
+      "name": "Comments",
       "type": "number"
     },
     "Duration": {

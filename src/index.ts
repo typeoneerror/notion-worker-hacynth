@@ -126,6 +126,10 @@ type PlaylistAction = {
   urn: string;
 };
 
+/**
+ * Verifies the webhook and returns an object that contains the URN of
+ * the track and whether to `includeTrack` in the playlist.
+ */
 function verifyOnPlaylistNextCheckedWebhook(event: WebhookEvent): PlaylistAction | null {
   // FIXME: actually verify w/crypto
 
@@ -156,6 +160,9 @@ function verifyOnPlaylistNextCheckedWebhook(event: WebhookEvent): PlaylistAction
   return { includeTrack, pageId, urn };
 }
 
+/**
+ * Update a playlists tracks when changes to state happen in Notion.
+ */
 async function updatePlaylist({ includeTrack, urn }: PlaylistAction) {
   const token = await soundcloudAuth.accessToken();
 
@@ -191,7 +198,7 @@ async function updatePlaylist({ includeTrack, urn }: PlaylistAction) {
 /**
  * Webhook to add a specific track to the "Next" playlist.
  *
- * TODO: could just load state from Notion database instead.
+ * FIXME: could probably just load state from Notion database instead.
  */
 worker.webhook('onPlaylistNextChecked', {
   title: 'Add to "Next" playlist',
@@ -209,6 +216,10 @@ worker.webhook('onPlaylistNextChecked', {
   },
 });
 
+/**
+ * Displays information about the selected track or a simple listing
+ * of tracks in the case the parent is a page in the data source.
+ */
 worker.customBlock('Soundcloud', {
   path: './blocks/soundcloud',
   command: 'npx vite build',
