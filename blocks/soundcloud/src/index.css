@@ -19,7 +19,6 @@ main {
 }
 
 .starter-card {
-  width: min(100%, 520px);
   padding: var(--spacing-24);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-12);
@@ -80,7 +79,7 @@ h1 {
   line-height: 1.5;
 }
 
-.next-step {
+.step {
   margin-top: var(--spacing-24);
   padding: var(--spacing-12) var(--spacing-16);
   border: 1px solid var(--border-secondary);
@@ -88,7 +87,7 @@ h1 {
   background: var(--bg-muted);
 }
 
-.next-step > span {
+.step > span {
   display: block;
   margin-bottom: var(--spacing-4);
   color: var(--content-tertiary);
@@ -98,11 +97,21 @@ h1 {
   text-transform: uppercase;
 }
 
-.next-step p {
+.step p,
+.step ul {
   margin: 0;
   color: var(--content-secondary);
   font-size: 13px;
   line-height: 1.6;
+}
+
+.step ul {
+  padding-left: var(--spacing-16);
+}
+
+.info {
+  font-style: italic;
+  color: var(--content-primary);
 }
 
 code {
@@ -125,7 +134,7 @@ code {
     padding: var(--spacing-20);
   }
 
-  .next-step p {
+  .step p {
     line-height: 1.7;
   }
 }

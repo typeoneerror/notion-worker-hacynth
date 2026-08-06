@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "dataSources": {
+    "tracks": {
+      "name": "Tracks",
+      "description": "Soundcloud Tracks",
+      "properties": {
+        "title": {
+          "name": "Title",
+          "description": "The title of the song",
+          "type": "title"
+        },
+        "url": {
+          "name": "URL",
+          "description": "The URL to the track on Soundcloud",
+          "type": "url"
+        }
+      }
+    }
+  }
+}

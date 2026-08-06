@@ -205,10 +205,27 @@ worker.webhook('onPlaylistNextChecked', {
   },
 });
 
-worker.customBlock('custom', {
-  path: './blocks/custom',
+worker.customBlock('Soundcloud', {
+  path: './blocks/soundcloud',
   command: 'npx vite build',
   output: 'dist',
   version: 1,
-  dataSources: {},
+  dataSources: {
+    tracks: {
+      name: 'Tracks',
+      description: 'Soundcloud Tracks',
+      properties: {
+        title: {
+          name: 'Title',
+          description: 'The title of the song',
+          type: 'title',
+        },
+        url: {
+          name: 'URL',
+          description: 'The URL to the track on Soundcloud',
+          type: 'url',
+        },
+      },
+    },
+  },
 });
