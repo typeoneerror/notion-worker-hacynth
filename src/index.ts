@@ -220,6 +220,11 @@ worker.customBlock('Soundcloud', {
           description: 'The title of the song',
           type: 'title',
         },
+        uri: {
+          name: 'URI',
+          description: 'The URI of the track reference on Soundcloud',
+          type: 'url',
+        },
         url: {
           name: 'URL',
           description: 'The URL to the track on Soundcloud',

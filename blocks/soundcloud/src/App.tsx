@@ -7,6 +7,7 @@ import {
   useTheme,
 } from '@notionhq/custom-blocks/react';
 
+import { Player } from './Player';
 import { Tracks } from './Tracks';
 import { describeParent } from './utils';
 
@@ -19,6 +20,16 @@ export function App() {
 
   const { items: tracks, isLoading, error } = useDataSource('tracks', { limit: 999 });
 
+  if (isLoading) {
+    return (
+      <div className="step">
+        <span className="label">Tracks</span>
+        <p>Loading track data...</p>
+      </div>
+    );
+  }
+
+  const currentTrack = tracks.find((track) => track.id === page.id);
   return (
     <main aria-labelledby="starter-title" data-display-mode={theme}>
       <section className="starter-card">
@@ -37,35 +48,31 @@ export function App() {
           </div>
         </div>
 
-        {isLoading ? (
-          <div className="step">
-            <span className="label">Tracks</span>
-            <p>Loading track data...</p>
-          </div>
-        ) : (
-          <>
-            <div className="step">
-              <span className="label">Location</span>
-              <p>
-                You're viewing <em className="info">{blockId}</em> inside{' '}
-                <em className="info">{page.id}</em>.
-              </p>
-            </div>
+        <div className="step">
+          <span className="label">Location</span>
+          <p>
+            You're viewing <em className="info">{blockId}</em> inside{' '}
+            <em className="info">{page.id}</em>.
+          </p>
+        </div>
 
-            <div className="step">
-              <span className="label">Parent</span>
-              <p>
-                This block is parented by <em className="info">{parent.id}</em> which is a{' '}
-                <em className="info">{parent.type}</em>.
-              </p>
-            </div>
+        <div className="step">
+          <span className="label">Parent</span>
+          <p>
+            This block is parented by <em className="info">{parent.id}</em> which is a{' '}
+            <em className="info">{parent.type}</em>.
+          </p>
+        </div>
 
-            <div className="step">
-              <span className="label">Tracks</span>
-              <Tracks tracks={tracks} page={page} error={error} />
-            </div>
-          </>
-        )}
+        <div className="step">
+          <span className="label">Player</span>
+          <Player currentTrack={currentTrack} />
+        </div>
+
+        <div className="step">
+          <span className="label">Tracks</span>
+          <Tracks tracks={tracks} currentTrack={currentTrack} error={error} />
+        </div>
       </section>
     </main>
   );

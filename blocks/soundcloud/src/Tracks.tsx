@@ -1,16 +1,15 @@
 import { CustomBlockQueryDataSourceErrorInfo } from '@notionhq/custom-blocks';
-import { useDataSource, usePage } from '@notionhq/custom-blocks/react';
+import { useDataSource } from '@notionhq/custom-blocks/react';
 
-type CustomBlockPage = ReturnType<typeof usePage>;
-type Track = ReturnType<typeof useDataSource>['items'][number];
+export type Track = ReturnType<typeof useDataSource>['items'][number];
 
 type TracksProps = {
+  currentTrack: Track | undefined;
   error: CustomBlockQueryDataSourceErrorInfo | undefined;
-  page: CustomBlockPage;
   tracks: Track[];
 };
 
-export function Tracks({ tracks, page, error }: TracksProps) {
+export function Tracks({ currentTrack, tracks, error }: TracksProps) {
   if (tracks.length === 0) {
     return <p>No tracks found.</p>;
   }
@@ -30,7 +29,7 @@ export function Tracks({ tracks, page, error }: TracksProps) {
   return (
     <ul>
       {sortedTracks.map((track) => {
-        const isSelected = track.id === page.id;
+        const isSelected = track.id === currentTrack.id;
         const className = isSelected ? 'selected' : undefined;
         const title = String(track.propertiesByKey.title ?? 'Untitled');
         return (
