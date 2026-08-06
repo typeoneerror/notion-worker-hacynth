@@ -9,7 +9,6 @@ import {
 
 import { Tracks } from './Tracks';
 import { describeParent } from './utils';
-import { Artwork } from './Artwork';
 
 export function App() {
   const me = useCurrentUser();
@@ -62,11 +61,6 @@ export function App() {
             This block is parented by <em className="info">{parent.id}</em> which is a{' '}
             <em className="info">{parent.type}</em>.
           </p>
-        </div>
-
-        <div className="step">
-          <span className="label">Artwork</span>
-          <Artwork currentTrack={currentTrack} />
         </div>
 
         <div className="step">
