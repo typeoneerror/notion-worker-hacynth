@@ -19,6 +19,11 @@
           "name": "URL",
           "description": "The URL to the track on Soundcloud",
           "type": "url"
+        },
+        "artwork_url": {
+          "name": "Artwork URL",
+          "description": "The URL to the track's artwork on Soundcloud",
+          "type": "url"
         }
       }
     }

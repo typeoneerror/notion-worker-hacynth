@@ -43,9 +43,11 @@ const tracks = worker.database('tracks', {
       Title: Schema.title(),
       'Release Date': Schema.date(),
       URL: Schema.url(),
+      'Artwork URL': Schema.url(),
 
       Plays: Schema.number(),
       Favorites: Schema.number(),
+      Comments: Schema.number(),
       Duration: Schema.number(),
 
       'Access Type': Schema.select(ACCESS_LEVELS.map((name) => ({ name, color: 'gray' as const }))),
@@ -68,8 +70,10 @@ function updateTrack(t: SoundcloudTrack) {
       Title: Builder.title(t.title),
       'Release Date': Builder.date(formatDate(t)),
       URL: Builder.url(t.permalink_url),
+      'Artwork URL': Builder.url(t.artwork_url),
       Plays: Builder.number(t.playback_count ?? 0),
       Favorites: Builder.number(t.favoritings_count ?? 0),
+      Comments: Builder.number(t.comment_count ?? 0),
       Duration: Builder.number(t.duration),
       'Access Type': Builder.select(t.access),
       URI: Builder.url(t.uri),
@@ -228,6 +232,11 @@ worker.customBlock('Soundcloud', {
         url: {
           name: 'URL',
           description: 'The URL to the track on Soundcloud',
+          type: 'url',
+        },
+        artwork_url: {
+          name: 'Artwork URL',
+          description: "The URL to the track's artwork on Soundcloud",
           type: 'url',
         },
       },

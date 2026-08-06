@@ -1,3 +1,5 @@
+// FIXME: security rules prevent using the player
+
 import { Track } from './Tracks';
 
 type PlayerProps = {

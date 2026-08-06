@@ -7,9 +7,9 @@ import {
   useTheme,
 } from '@notionhq/custom-blocks/react';
 
-import { Player } from './Player';
 import { Tracks } from './Tracks';
 import { describeParent } from './utils';
+import { Artwork } from './Artwork';
 
 export function App() {
   const me = useCurrentUser();
@@ -65,8 +65,8 @@ export function App() {
         </div>
 
         <div className="step">
-          <span className="label">Player</span>
-          <Player currentTrack={currentTrack} />
+          <span className="label">Artwork</span>
+          <Artwork currentTrack={currentTrack} />
         </div>
 
         <div className="step">

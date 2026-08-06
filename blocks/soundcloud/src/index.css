@@ -133,6 +133,14 @@ code {
   white-space: nowrap;
 }
 
+.artwork {
+  width: 100%;
+  max-width: max-content;
+  border-radius: var(--radius-4);
+  margin: auto;
+  display: block;
+}
+
 @media (max-width: 420px) {
   main {
     padding: var(--spacing-8);
