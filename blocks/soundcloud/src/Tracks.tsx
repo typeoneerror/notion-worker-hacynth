@@ -29,7 +29,7 @@ export function Tracks({ currentTrack, tracks, error }: TracksProps) {
   return (
     <ul>
       {sortedTracks.map((track) => {
-        const isSelected = track.id === currentTrack.id;
+        const isSelected = track.id === currentTrack?.id;
         const className = isSelected ? 'selected' : undefined;
         const title = String(track.propertiesByKey.title ?? 'Untitled');
         return (
