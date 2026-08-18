@@ -1,6 +1,6 @@
 {
-  "name": "@notion-cookbook/custom",
-  "version": "0.0.0",
+  "name": "hacynth",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
