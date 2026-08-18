@@ -187,11 +187,7 @@ async function updatePlaylist({ includeTrack, urn }: PlaylistAction) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      playlist: {
-        tracks,
-      },
-    }),
+    body,
   });
 }
 
