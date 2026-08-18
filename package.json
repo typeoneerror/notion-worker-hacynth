@@ -6,22 +6,24 @@
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit && tsc -p blocks/soundcloud/tsconfig.json --noEmit",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "presbx": "sbx ls | grep -qE '^hacynth[[:space:]]' || sbx create claude --name hacynth --kit ~/dotfiles/sbx/kits/claude/mixin --kit ~/dotfiles/sbx/kits/notion .",
+    "sbx": "sbx run --name hacynth"
   },
   "engines": {
     "node": ">=22.0.0",
     "npm": ">=10.9.2"
   },
   "devDependencies": {
-    "@types/node": "^22.20.1",
+    "@types/node": "^26.2.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
-    "typescript": "^6.0.3",
-    "vite": "^8.1.5"
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
   },
   "dependencies": {
-    "@notionhq/custom-blocks": "^0.1.2",
+    "@notionhq/custom-blocks": "^0.1.26",
     "@notionhq/workers": ">=0.0.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
