@@ -217,6 +217,7 @@ worker.webhook('onPlaylistNextChecked', {
  * of tracks in the case the parent is a page in the data source.
  */
 worker.customBlock('Soundcloud', {
+  slashCommand: 'soundcloud',
   path: './blocks/soundcloud',
   command: 'npx vite build',
   output: 'dist',
