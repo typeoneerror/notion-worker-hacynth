@@ -7,8 +7,54 @@ import {
   useTheme,
 } from '@notionhq/custom-blocks/react';
 
+import {
+  CustomBlockGetPageErrorInfo,
+  NotionPage,
+  NotionPageId,
+  pages,
+} from '@notionhq/custom-blocks';
+
+import { useEffect, useState } from 'react';
+
 import { Tracks } from './Tracks';
+import { TrackProperties } from './TrackProperties';
 import { describeParent } from './utils';
+
+function usePageById(pageId: NotionPageId) {
+  const [page, setPage] = useState<NotionPage | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<CustomBlockGetPageErrorInfo | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      setIsLoading(true);
+      setError(null);
+
+      const result = await pages.get(pageId);
+      if (cancelled) return;
+
+      if (result.status === 'error') {
+        setError(result.error);
+        setPage(null);
+      } else {
+        setError(null);
+        setPage(result.page);
+      }
+
+      setIsLoading(false);
+    }
+
+    load();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [pageId]);
+
+  return { page, isLoading, error };
+}
 
 export function App() {
   const me = useCurrentUser();
@@ -18,6 +64,7 @@ export function App() {
   const theme = useTheme();
 
   const { items: tracks, isLoading, error } = useDataSource('tracks', { limit: 999 });
+  const { page: track, isLoading: isTrackLoading, error: trackError } = usePageById(page.id);
 
   if (isLoading) {
     return (
@@ -66,6 +113,12 @@ export function App() {
         <div className="step">
           <span className="label">Tracks</span>
           <Tracks tracks={tracks} currentTrack={currentTrack} error={error} />
+        </div>
+
+        <div className="step">
+          <span className="label">Track Properties</span>
+
+          <TrackProperties track={track} isLoading={isTrackLoading} error={trackError} />
         </div>
       </section>
     </main>
