@@ -1,56 +1,298 @@
 {
-  "type": "worker",
-  "key": "worker_tracks",
+  "key": "sc_tracks",
   "name": "SC Tracks",
+  "rows": [
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-L5wgE9ycctfxENfh-CWariQ-large.jpg",
+      "comments": 1,
+      "duration": 253362,
+      "favorites": 6,
+      "id": "0142d015-2fa3-4cdc-bc5e-d5f2d394c849",
+      "id_2": "1782822489",
+      "length": "4:13",
+      "next": false,
+      "plays": 40,
+      "release_date": {
+        "start_date": "2024-03-10",
+        "type": "date"
+      },
+      "title": "Wavy",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1782822489",
+      "url": "https://soundcloud.com/hacynth/wavy?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1782822489"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-MfW7nxCGzT3fzZ07-ku5zQw-large.jpg",
+      "comments": 3,
+      "duration": 284656,
+      "favorites": 17,
+      "id": "1fd8a7c0-b3c5-4cd4-8e21-2bffd16447cc",
+      "id_2": "1782820668",
+      "length": "4:44",
+      "next": false,
+      "plays": 658,
+      "release_date": {
+        "start_date": "2024-03-18",
+        "type": "date"
+      },
+      "title": "Loud Enough",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1782820668",
+      "url": "https://soundcloud.com/hacynth/loud-enough?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1782820668"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-Xhl10fnLxCeEBCRT-wrWSyg-large.jpg",
+      "comments": 1,
+      "duration": 357224,
+      "favorites": 17,
+      "id": "4b159b7f-6bac-4333-8301-7752e82d9885",
+      "id_2": "1787355727",
+      "length": "5:57",
+      "next": false,
+      "plays": 487,
+      "release_date": {
+        "start_date": "2024-03-25",
+        "type": "date"
+      },
+      "title": "Dreamer",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1787355727",
+      "url": "https://soundcloud.com/hacynth/dreamer?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1787355727"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-80zVKcHdMgl2XufS-FKIfdw-large.jpg",
+      "comments": 7,
+      "duration": 366028,
+      "favorites": 15,
+      "id": "6af6fd74-2b07-49f3-8ba8-e8214ffeed16",
+      "id_2": "1800235627",
+      "length": "6:06",
+      "next": false,
+      "plays": 607,
+      "release_date": {
+        "start_date": "2024-04-10",
+        "type": "date"
+      },
+      "title": "Levels",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1800235627",
+      "url": "https://soundcloud.com/hacynth/levels?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1800235627"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-qoLOTQgGU62OEmhy-oQXKKw-large.jpg",
+      "comments": 0,
+      "duration": 366028,
+      "favorites": 3,
+      "id": "ae9435d6-36ba-4507-b258-91d5b41fd501",
+      "id_2": "1800235612",
+      "length": "6:06",
+      "next": false,
+      "plays": 45,
+      "release_date": {
+        "start_date": "2024-04-06",
+        "type": "date"
+      },
+      "title": "Levels (Instrumental)",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1800235612",
+      "url": "https://soundcloud.com/hacynth/levels-instrumental?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1800235612"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-6oThjqngXyzCdSrf-a0l63g-large.jpg",
+      "comments": 5,
+      "duration": 355814,
+      "favorites": 18,
+      "id": "d963093b-99ee-41d1-b802-c07bda9b056e",
+      "id_2": "1806366789",
+      "length": "5:55",
+      "next": false,
+      "plays": 425,
+      "release_date": {
+        "start_date": "2024-04-23",
+        "type": "date"
+      },
+      "title": "101 North",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1806366789",
+      "url": "https://soundcloud.com/hacynth/101-north?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1806366789"
+    },
+    {
+      "access": [
+        {
+          "id": "8fe75cf9-8a28-484e-aed8-149e8293d5fc",
+          "table": "notion_user"
+        }
+      ],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-tnHWTAQ9dayhZfOR-YnxeKw-large.jpg",
+      "comments": 5,
+      "duration": 274834,
+      "favorites": 13,
+      "id": "69ae61b4-dda5-41f7-8555-ce8d8c618d6b",
+      "id_2": "1865813418",
+      "length": "4:34",
+      "next": false,
+      "plays": 346,
+      "release_date": {
+        "start_date": "2024-07-07",
+        "type": "date"
+      },
+      "title": "Ataraxis",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1865813418",
+      "url": "https://soundcloud.com/hacynth/ataraxis?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1865813418"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-IHhzpZiWN9ZzG4ov-VCig1g-large.jpg",
+      "comments": 1,
+      "duration": 196467,
+      "favorites": 6,
+      "id": "99ba38ca-bcd5-41d9-84b5-b42205d15e26",
+      "id_2": "1886914158",
+      "length": "3:16",
+      "next": false,
+      "plays": 237,
+      "release_date": {
+        "start_date": "2024-08-01",
+        "type": "date"
+      },
+      "title": "Nyx's Groove",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1886914158",
+      "url": "https://soundcloud.com/hacynth/nyxs-groove?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1886914158"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-z9z2ytBEzL49y9Cr-Up5UJQ-large.jpg",
+      "comments": 1,
+      "duration": 272039,
+      "favorites": 9,
+      "id": "9ff0694a-7b53-414c-a6ba-b96fea92720a",
+      "id_2": "1921201340",
+      "length": "4:32",
+      "next": false,
+      "plays": 802,
+      "release_date": {
+        "start_date": "2024-09-19",
+        "type": "date"
+      },
+      "title": "Superposition",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1921201340",
+      "url": "https://soundcloud.com/hacynth/superposition?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1921201340"
+    },
+    {
+      "access": [],
+      "access_type": "playable",
+      "album": [],
+      "artwork_url": "https://i1.sndcdn.com/artworks-33WO6rMOo9AVhNDY-t1sINw-large.jpg",
+      "comments": 0,
+      "duration": 325538,
+      "favorites": 3,
+      "id": "ac956538-1744-4294-972a-816c9cc99169",
+      "id_2": "1890038886",
+      "length": "5:25",
+      "next": false,
+      "plays": 301,
+      "release_date": {
+        "start_date": "2024-08-06",
+        "type": "date"
+      },
+      "title": "Nimbus",
+      "uri": "https://api.soundcloud.com/tracks/soundcloud:tracks:1890038886",
+      "url": "https://soundcloud.com/hacynth/nimbus?utm_medium=api&utm_campaign=social_sharing&utm_source=id_334121",
+      "urn": "soundcloud:tracks:1890038886"
+    }
+  ],
   "schema": {
-    "ID": {
-      "name": "ID",
-      "type": "rich_text"
+    "access": {
+      "name": "Access",
+      "type": "people"
     },
-    "Title": {
-      "name": "Title",
-      "type": "title"
-    },
-    "Release Date": {
-      "name": "Release Date",
-      "type": "date"
-    },
-    "URL": {
-      "name": "URL",
-      "type": "url"
-    },
-    "Artwork URL": {
-      "name": "Artwork URL",
-      "type": "url"
-    },
-    "Plays": {
-      "name": "Plays",
-      "type": "number"
-    },
-    "Favorites": {
-      "name": "Favorites",
-      "type": "number"
-    },
-    "Comments": {
-      "name": "Comments",
-      "type": "number"
-    },
-    "Duration": {
-      "name": "Duration",
-      "type": "number"
-    },
-    "Access Type": {
+    "access_type": {
       "name": "Access Type",
       "type": "select"
     },
-    "URI": {
+    "album": {
+      "name": "Album",
+      "type": "relation"
+    },
+    "artwork_url": {
+      "name": "Artwork URL",
+      "type": "url"
+    },
+    "comments": {
+      "name": "Comments",
+      "type": "number"
+    },
+    "duration": {
+      "name": "Duration",
+      "type": "number"
+    },
+    "favorites": {
+      "name": "Favorites",
+      "type": "number"
+    },
+    "id_2": {
+      "name": "ID",
+      "type": "rich_text"
+    },
+    "length": {
+      "name": "Length",
+      "type": "formula"
+    },
+    "next": {
+      "name": "Next?",
+      "type": "checkbox"
+    },
+    "plays": {
+      "name": "Plays",
+      "type": "number"
+    },
+    "release_date": {
+      "name": "Release Date",
+      "type": "date"
+    },
+    "title": {
+      "name": "Title",
+      "type": "title"
+    },
+    "uri": {
       "name": "URI",
       "type": "url"
     },
-    "URN": {
+    "url": {
+      "name": "URL",
+      "type": "url"
+    },
+    "urn": {
       "name": "URN",
       "type": "rich_text"
     }
   },
-  "rows": []
+  "type": "syncedFromProd"
 }
